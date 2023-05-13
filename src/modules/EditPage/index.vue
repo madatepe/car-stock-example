@@ -27,10 +27,10 @@ export default {
   },
   methods: {
     cancel() {
-      console.log('1111')
+      this.$emit('cancel');
     },
     save() {
-      console.log('1111')
+      this.$emit('updateCar', this.car);
     },
   },
   watch: {

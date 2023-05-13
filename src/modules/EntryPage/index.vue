@@ -1,59 +1,51 @@
 <script>
-import Loader from '../../components/Loader';
-import CarList from './components/CarList';
+import CarListHeader from './components/CarListHeader';
+import CarListItem from './components/CarListItem';
 
 export default {
   name: 'EntryPage',
-  components: { Loader, CarList },
-  data() {
-    return {
-      cars: [],
-      carsIsLoading: true,
-      selectedCar: null,
-    };
+  components: {
+    CarListHeader,
+    CarListItem,
   },
-  methods: {
-    fetchData() {
-      this.cars = [
-        {
-          id: 1,
-          carId: 'AAA0',
-          inStock: true,
-          hp: 250,
-          price: 50000,
-          color: 'red',
-        },
-        {
-          id: 2,
-          carId: 'AAA1',
-          inStock: false,
-          hp: 140,
-          price: 30000,
-          color: 'blue',
-        },
-      ];
-
-      setTimeout(() => {
-        this.carsIsLoading = false;
-      }, 2200)
-    },
-  },
-  mounted() {
-    this.fetchData();
+  props: {
+    cars: { type: Array, required: false, default: () => [] }
   },
 }
 </script>
 
 <template>
-  <div class="entry-page">
-    <Loader v-if="carsIsLoading" />
-    <CarList v-else :cars="cars" @editCar="$emit('editCar', $event)" />
+  <div class="car-list">
+    <table class="car-list__table">
+      <caption class="car-list__caption">Car list</caption>
+      <CarListHeader />
+      <tbody>
+        <CarListItem
+          v-for="car in cars"
+          :key="car.id"
+          :car="car"
+          @editItem="$emit('editCar', $event)"
+        />
+      </tbody>
+    </table>
   </div>
 </template>
 
 <style lang="scss">
-.entry-page {
-  display: flex;
-  justify-content: center;
+.car-list {
+  width: 100%;
+  
+  &__table {
+    width: inherit;
+  }
+
+  &__caption {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #3498db;
+    border-bottom: 2px solid #fab700;
+    padding-bottom: 1rem;
+  }
 }
 </style>
