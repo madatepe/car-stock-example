@@ -39,6 +39,10 @@ export default {
   
   &__cancel {
     background: #cf3131 !important;
+
+    &:hover {
+      background: #9d2626 !important;
+    }
   }
 
   &__disabled {
