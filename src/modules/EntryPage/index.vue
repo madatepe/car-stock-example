@@ -4,14 +4,12 @@ import CarList from './components/CarList';
 
 export default {
   name: 'EntryPage',
-  components: {
-    Loader,
-    CarList,
-  },
+  components: { Loader, CarList },
   data() {
     return {
       cars: [],
-      isLoading: true,
+      carsIsLoading: true,
+      selectedCar: null,
     };
   },
   methods: {
@@ -36,7 +34,7 @@ export default {
       ];
 
       setTimeout(() => {
-        this.isLoading = false;
+        this.carsIsLoading = false;
       }, 2200)
     },
   },
@@ -48,8 +46,8 @@ export default {
 
 <template>
   <div class="entry-page">
-    <Loader v-if="isLoading" />
-    <CarList v-else :cars="cars" />
+    <Loader v-if="carsIsLoading" />
+    <CarList v-else :cars="cars" @editCar="$emit('editCar', $event)" />
   </div>
 </template>
 

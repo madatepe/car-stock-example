@@ -4,17 +4,26 @@ import EditPage from '../modules/EditPage'
 
 export default {
   name: 'Container',
-  components: {
-    EntryPage,
-    EditPage,
-  }
+  components: { EntryPage, EditPage },
+  data() {
+    return {
+      editMode: false,
+      selectedCar: null,
+    };
+  },
+  methods: {
+    editCar(car) {
+      this.selectedCar = car;
+      this.editMode = true;
+    },
+  },
 }
 </script>
 
 <template>
   <div class="app-container">
-    <EntryPage />
-    <EditPage />
+    <EditPage v-if="editMode" :selected-car="selectedCar" />
+    <EntryPage v-else @editCar="editCar" />
   </div>
 </template>
 

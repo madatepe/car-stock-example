@@ -16,7 +16,6 @@ export default {
 
 <template>
   <div class="car-list">
-    {{  cars  }}
     <table class="car-list__table">
       <caption class="car-list__caption">Car list</caption>
       <CarListHeader />
@@ -25,6 +24,7 @@ export default {
           v-for="car in cars"
           :key="car.id"
           :car="car"
+          @editItem="$emit('editCar', $event)"
         />
       </tbody>
     </table>
@@ -45,6 +45,7 @@ export default {
     font-size: 1.5rem;
     color: #3498db;
     border-bottom: 2px solid #fab700;
+    padding-bottom: 1rem;
   }
 }
 </style>
