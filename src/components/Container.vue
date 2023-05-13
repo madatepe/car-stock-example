@@ -2,6 +2,7 @@
 import EntryPage from '../modules/EntryPage'
 import EditPage from '../modules/EditPage'
 import Loader from '../components/Loader';
+import axios from "axios";
 
 export default {
   name: 'Container',
@@ -16,28 +17,17 @@ export default {
   },
   methods: {
     fetchData() {
-      this.cars = [
-        {
-          id: 1,
-          carId: 'AAA0',
-          inStock: true,
-          hp: 250,
-          price: 50000,
-          color: 'red',
-        },
-        {
-          id: 2,
-          carId: 'AAA1',
-          inStock: false,
-          hp: 140,
-          price: 30000,
-          color: 'blue',
-        },
-      ];
-
+      // This timeout is added here to indicate an async process
       setTimeout(() => {
-        this.carsIsLoading = false;
-      }, 2)
+        axios.get('https://run.mocky.io/v3/ae1904d5-ecf2-460e-be1b-860b9d9cd9b3')
+          .then(({ data }) => {
+            this.cars = data;
+          })
+          .catch(() => {})
+          .finally(() => {
+            this.carsIsLoading = false;
+          });
+      }, 500)
     },
     editCar(car) {
       this.selectedCar = car;

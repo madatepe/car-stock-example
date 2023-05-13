@@ -16,6 +16,8 @@ export default {
   width: 32px;
   height: 32px;
   animation: spin 1.2s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
 
   @keyframes spin {
     0% { transform: rotate(0deg); }

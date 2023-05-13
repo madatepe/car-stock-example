@@ -9,6 +9,11 @@ export default {
   components: {
     Button,
   },
+  computed: {
+    inStockSvgUrl() {
+      return this.car.inStock ? '/svg/check.svg' : '/svg/cancel.svg';
+    },
+  },
   methods: {
     editItem() {
       this.$emit("editItem", this.car);
@@ -19,12 +24,16 @@ export default {
 
 <template>
   <tr class="car-list-item">
-    <td class="car-id">{{ car.carId }}</td>
-    <td>{{ car.id }}</td>
-    <td class="in-stock">{{ car.inStock }}</td>
+    <td class="car-id"><b>{{ car.id }}</b></td>
+    <td>{{ car.carId }}</td>
+    <td class="in-stock">
+      <img class="in-stock__svg" :src="inStockSvgUrl">
+    </td>
     <td>{{ car.hp }}</td>
-    <td>{{ car.price }}</td>
-    <td>{{ car.color }}</td>
+    <td>{{ car.price }}$</td>
+    <td class="color" :style="{ color: car.color }">
+      &bull;
+    </td>
     <td class="edit">
       <Button text="Edit" @click="editItem" />
     </td>
@@ -38,7 +47,7 @@ export default {
   
   td {
     border-radius: 0.5rem;
-    padding: 10px;
+    padding: 0.5rem;
     border: 1px solid #F1F1F1;
   }
 
@@ -48,14 +57,22 @@ export default {
 
   .in-stock {
     width: 5%;
+
+    &__svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .color {
+    width: 5%;
+    font-size: 2.3rem;
+    padding: 0;
+    margin: 0;
   }
   
   .edit {
     width: 10%;
-
-    &-button {
-      
-    }
   }
 }
 </style>
