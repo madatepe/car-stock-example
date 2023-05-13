@@ -1,12 +1,17 @@
 <script>
+import Button from '../../../components/Button';
+
 export default {
   name: 'CarListItem',
   props: {
     car: { type: Object, required: true },
   },
+  components: {
+    Button,
+  },
   methods: {
     editItem() {
-      this.emit("editItem", this.car);
+      this.$emit("editItem", this.car);
     },
   },
 }
@@ -21,7 +26,7 @@ export default {
     <td>{{ car.price }}</td>
     <td>{{ car.color }}</td>
     <td class="edit">
-      <button class="edit-button" @click="editItem">Edit</button>
+      <Button text="Edit" @click="editItem" />
     </td>
   </tr>
 </template>
@@ -49,17 +54,7 @@ export default {
     width: 10%;
 
     &-button {
-      background-color: #3498db;
-      border: none;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      font-weight: bold;
-  
-      &:hover {
-        background: #2779b0;
-        cursor: pointer;
-      }
+      
     }
   }
 }
