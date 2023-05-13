@@ -24,6 +24,9 @@ export default {
     save() {
       this.$emit('updateCar', this.car);
     },
+    checkValidPrice() {
+      this.car.price = this.car.price.match(/^[0-9,$.\u20BA\u20AC]*$/g) ? this.car.price : ''
+    },
   },
   computed: {
     hpRangeErrorVisible() {
@@ -56,11 +59,17 @@ export default {
       </p>
       <p>
         <b>PRICE:</b>
-        <input v-model.number="car.price" class="text-input" />
+        <input v-model="car.price" class="text-input" @input="checkValidPrice" />
       </p>
       <p><br><b>COLOR:</b></p>
       <div v-for="(color, index) in colors" :key="index">
-        <input type="radio" :id="color" :value="color" v-model="car.color" />
+        <input
+          type="radio"
+          :id="color"
+          :value="color"
+          v-model="car.color"
+          :style="{ 'accent-color': car.color }"
+        />
         <label :for="color" :style="{ color: color }">
           <b>{{ color }}</b>
         </label>
@@ -82,6 +91,14 @@ export default {
     margin-left: 0.5rem;
     min-width: 1rem;
     margin-top: 0.5rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  label {
+    top: -5px;
+    position: relative;
+    margin-left: 0.5rem;
   }
   
   .error-text {
@@ -96,12 +113,24 @@ export default {
     color: #444;
     padding: 0.5rem;
     border: 1px solid #444;
+    width: auto;
+  }
+
+  &__form {
+    width: 500px;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    background: #eaeaea;
   }
 
   &__actions {
     gap: 1rem;
     display: flex;
     margin-top: 2rem;
+
+    button {
+      height: 48px;
+    }
   }
 }
 </style>

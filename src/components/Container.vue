@@ -19,11 +19,14 @@ export default {
     fetchData() {
       // This timeout is added here to indicate an async process
       setTimeout(() => {
-        axios.get('https://run.mocky.io/v3/ae1904d5-ecf2-460e-be1b-860b9d9cd9b3')
+        // Expected Data: {"data":[{"id":1,"carId":"A1A1A1A1A1A1","inStock":true,"hp":140,"price":"10000$","color":"red"},{"id":2,"carId":"A2A2A2A2A2A2","inStock":false,"hp":250,"price":"5000$","color":"orange"},{"id":3,"carId":"A3A3A3A3A3A3","inStock":false,"hp":165,"price":"2350$","color":"red"},{"id":4,"carId":"A4A4A4A4A4A4","inStock":true,"hp":220,"price":"2000$","color":"blue"},{"id":5,"carId":"A5A5A5A5A5A5","inStock":true,"hp":182,"price":"1200$","color":"red"},{"id":6,"carId":"A6A6A6A6A6A6","inStock":false,"hp":250,"price":"5000$","color":"brown"},{"id":7,"carId":"A7A7A7A7A7A7","inStock":true,"hp":200,"price":"21000$","color":"purple"}]}
+        axios.get('https://run.mocky.io/v3/25ca1565-a7d6-4d36-8491-9355a64a9bb5')
           .then(({ data }) => {
-            this.cars = data;
+            this.cars = data.data;
           })
-          .catch(() => {})
+          .catch((error) => {
+            alert(error.message)
+          })
           .finally(() => {
             this.carsIsLoading = false;
           });
@@ -43,7 +46,6 @@ export default {
       this.closeEditMode();
     },
   },
-
   mounted() {
     this.fetchData();
   },

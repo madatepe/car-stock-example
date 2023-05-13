@@ -30,7 +30,7 @@ export default {
       <img class="in-stock__svg" :src="inStockSvgUrl">
     </td>
     <td>{{ car.hp }}</td>
-    <td>{{ car.price }}$</td>
+    <td>{{ car.price }}</td>
     <td class="color" :style="{ color: car.color }">
       &bull;
     </td>
