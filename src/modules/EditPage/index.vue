@@ -1,4 +1,5 @@
 <script>
+import { isEqual } from 'lodash';
 import Button from '../../components/Button';
 
 export default {
@@ -29,7 +30,9 @@ export default {
       return this.car.hp < 100 || this.car.hp > 550;
     },
     saveButtonDisable() {
-      return this.hpRangeErrorVisible || this.car === this.selectedCar;
+      const compareObjects = isEqual(this.car, this.selectedCar);
+
+      return this.hpRangeErrorVisible || compareObjects;
     },
   },
 }
