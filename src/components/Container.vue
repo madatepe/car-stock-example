@@ -1,9 +1,11 @@
 <script>
-import EditPage from './EditPage'
+import EntryPage from '../modules/EntryPage'
+import EditPage from '../modules/EditPage'
 
 export default {
   name: 'Container',
   components: {
+    EntryPage,
     EditPage,
   }
 }
@@ -11,6 +13,7 @@ export default {
 
 <template>
   <div class="app-container">
+    <EntryPage />
     <EditPage />
   </div>
 </template>
