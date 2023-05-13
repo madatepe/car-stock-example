@@ -1,12 +1,17 @@
 <script>
+import EditPage from './EditPage'
+
 export default {
   name: 'Container',
+  components: {
+    EditPage,
+  }
 }
 </script>
 
 <template>
   <div class="app-container">
-    Container
+    <EditPage />
   </div>
 </template>
 
